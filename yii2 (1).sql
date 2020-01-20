@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 08 2020 г., 09:57
--- Версия сервера: 5.7.25
+-- Время создания: Янв 20 2020 г., 10:44
+-- Версия сервера: 5.6.43
 -- Версия PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -30,26 +30,24 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `authors` (
   `id` int(11) NOT NULL,
-  `surname` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `surname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `authors`
 --
 
 INSERT INTO `authors` (`id`, `surname`, `name`, `created_at`) VALUES
-(10, 'Sahyan', 'Hamo', '2019-12-19 11:43:33'),
-(11, 'Kaputikyan', 'Silva', '2019-12-19 11:43:33'),
-(12, 'Shiraz', 'Hovhannes', '2019-12-19 11:44:46'),
-(13, 'Matevosyan', 'Hrant', '2019-12-19 11:44:46'),
-(14, 'Tumanyan', 'Hovhannes', '2019-12-19 19:29:24'),
-(15, 'Axayan', 'Xazaros', '2019-12-24 13:13:52'),
-(16, 'Wilde ', 'Oscar', '2019-12-25 09:31:22'),
-(17, 'Bronte ', 'Charlotte', '2019-12-25 09:32:54'),
-(18, 'Duma', 'Aleksandr ', '2019-12-25 09:33:59'),
-(19, 'Austen', 'Jane ', '2019-12-25 09:38:27');
+(1, 'Tumanyan', 'Huvhannes', '2020-01-19 08:13:47'),
+(2, 'Sahyan', 'Hamo', '2020-01-19 08:13:56'),
+(3, 'Dumas', 'Alexandre ', '2020-01-19 08:14:05'),
+(4, 'Axayan', 'Xazaros', '2020-01-19 08:14:14'),
+(5, 'Bronte', 'Charlotte ', '2020-01-19 08:14:22'),
+(6, 'Isahakyan', 'Avetis', '2020-01-19 08:14:30'),
+(7, 'Wilde', 'Oscar ', '2020-01-19 08:16:24'),
+(8, 'Qristi', 'Agata ', '2020-01-19 08:16:24');
 
 -- --------------------------------------------------------
 
@@ -61,40 +59,33 @@ CREATE TABLE `authors_and_books` (
   `id` int(11) NOT NULL,
   `author_id` int(11) NOT NULL,
   `book_id` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `created_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `authors_and_books`
 --
 
 INSERT INTO `authors_and_books` (`id`, `author_id`, `book_id`, `created_at`) VALUES
-(35, 10, 129, '2020-01-06 18:34:42'),
-(36, 13, 129, '2020-01-06 18:34:42'),
-(37, 13, 130, '2020-01-06 18:35:04'),
-(38, 15, 130, '2020-01-06 18:35:04'),
-(39, 12, 131, '2020-01-06 18:35:17'),
-(40, 15, 132, '2020-01-06 18:35:31'),
-(41, 11, 133, '2020-01-06 18:35:52'),
-(42, 19, 133, '2020-01-06 18:35:52'),
-(43, 17, 134, '2020-01-06 18:36:35'),
-(44, 18, 134, '2020-01-06 18:36:35'),
-(45, 16, 135, '2020-01-06 18:36:52'),
-(46, 12, 136, '2020-01-06 18:37:03'),
-(47, 14, 137, '2020-01-06 18:37:23'),
-(48, 11, 138, '2020-01-06 18:37:34'),
-(49, 13, 139, '2020-01-06 18:37:45'),
-(50, 12, 141, '2020-01-06 18:38:26'),
-(51, 15, 141, '2020-01-06 18:38:26'),
-(52, 11, 140, '2020-01-06 18:38:44'),
-(53, 13, 142, '2020-01-06 18:39:03'),
-(54, 10, 146, '2020-01-06 18:39:22'),
-(55, 11, 146, '2020-01-06 18:39:22'),
-(56, 18, 143, '2020-01-06 18:39:45'),
-(57, 15, 144, '2020-01-06 18:40:00'),
-(58, 12, 145, '2020-01-06 18:40:23'),
-(59, 14, 145, '2020-01-06 18:40:23'),
-(60, 12, 130, '2020-01-08 06:40:22');
+(1, 2, 3, NULL),
+(2, 5, 3, NULL),
+(3, 6, 4, NULL),
+(4, 8, 4, NULL),
+(5, 3, 6, NULL),
+(6, 5, 6, NULL),
+(7, 2, 5, NULL),
+(8, 4, 7, NULL),
+(9, 7, 7, NULL),
+(10, 2, 8, NULL),
+(11, 3, 8, NULL),
+(12, 1, 10, NULL),
+(13, 8, 10, NULL),
+(14, 1, 12, NULL),
+(15, 2, 12, NULL),
+(16, 3, 11, NULL),
+(17, 5, 11, NULL),
+(18, 4, 9, NULL),
+(19, 7, 9, NULL);
 
 -- --------------------------------------------------------
 
@@ -104,33 +95,25 @@ INSERT INTO `authors_and_books` (`id`, `author_id`, `book_id`, `created_at`) VAL
 
 CREATE TABLE `books` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `books`
 --
 
 INSERT INTO `books` (`id`, `title`, `created_at`) VALUES
-(129, 'Gguhijhoi', '2020-01-06 18:31:29'),
-(130, 'Vhsbxjskn', '2020-01-06 18:31:29'),
-(131, 'Gguhijhoi', '2020-01-06 18:31:34'),
-(132, 'Vhsbxjskn', '2020-01-06 18:31:34'),
-(133, 'Fnjnj', '2020-01-06 18:32:00'),
-(134, 'Hbvjknv', '2020-01-06 18:32:00'),
-(135, 'Fnjnj', '2020-01-06 18:32:03'),
-(136, 'Hbvjknv', '2020-01-06 18:32:03'),
-(137, 'Msdvjdnf', '2020-01-06 18:32:18'),
-(138, 'Ocndjvnef', '2020-01-06 18:32:18'),
-(139, 'Msdvjdnf', '2020-01-06 18:32:21'),
-(140, 'Ocndjvnef', '2020-01-06 18:32:21'),
-(141, 'Pnsdklvnd', '2020-01-06 18:32:48'),
-(142, 'Khgtrjgn', '2020-01-06 18:32:48'),
-(143, 'Ybjbjhn', '2020-01-06 18:33:09'),
-(144, 'Rvhb', '2020-01-06 18:33:09'),
-(145, 'Ybjbjhn', '2020-01-06 18:33:15'),
-(146, 'Rvhb', '2020-01-06 18:33:15');
+(3, 'Dgvgvh', '2020-01-19 08:07:39'),
+(4, 'Fvgvu', '2020-01-19 08:07:39'),
+(5, 'Gghbilh', '2020-01-19 08:08:04'),
+(6, 'Hbhbihb', '2020-01-19 08:08:04'),
+(7, 'Efcfcvkg', '2020-01-19 08:08:21'),
+(8, 'Uhbhbhj', '2020-01-19 08:08:21'),
+(9, 'Cvgvhgb', '2020-01-19 08:08:53'),
+(10, 'Rvgvhblhj', '2020-01-19 08:08:53'),
+(11, 'Xvhbhbj', '2020-01-19 08:09:20'),
+(12, 'Bgvuhbilhb', '2020-01-19 08:09:20');
 
 -- --------------------------------------------------------
 
@@ -139,19 +122,19 @@ INSERT INTO `books` (`id`, `title`, `created_at`) VALUES
 --
 
 CREATE TABLE `migration` (
-  `version` varchar(180) NOT NULL,
+  `version` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apply_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `migration`
 --
 
 INSERT INTO `migration` (`version`, `apply_time`) VALUES
-('m000000_000000_base', 1576580809),
-('m191217_190754_create_books_table', 1576614274),
-('m191217_190847_create_authors_table', 1576614274),
-('m191217_190928_create_authors_and_books_table', 1576614274);
+('m000000_000000_base', 1579382948),
+('m191217_190754_create_books_table', 1579382986),
+('m191217_190847_create_authors_table', 1579382986),
+('m191217_190928_create_authors_and_books_table', 1579382986);
 
 --
 -- Индексы сохранённых таблиц
@@ -191,19 +174,19 @@ ALTER TABLE `migration`
 -- AUTO_INCREMENT для таблицы `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `authors_and_books`
 --
 ALTER TABLE `authors_and_books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT для таблицы `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
