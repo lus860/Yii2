@@ -14,7 +14,7 @@ use Yii;
  *
  * @property AuthorsAndBooks[] $authorsAndBooks
  */
-class Authors extends \yii\db\ActiveRecord
+class Author extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -45,6 +45,7 @@ class Authors extends \yii\db\ActiveRecord
             'surname' => 'Surname',
             'name' => 'Name',
             'created_at' => 'Created At',
+            'book_id' => 'Books',
         ];
     }
     
@@ -56,14 +57,14 @@ class Authors extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthorsAndBooks()
+    public function getAuthorAndBook()
     {
-        return $this->hasMany(AuthorsAndBooks::className(), ['author_id' => 'id']);
+        return $this->hasMany(AuthorAndBook::className(), ['author_id' => 'id']);
     }
-    
-    public function getBooks()
+
+    public function getBook()
     {
-        return $this->hasMany(Books::className(), ['id' => 'book_id'])->via('authorsAndBooks')->all();
+        return $this->hasMany(Book::className(), ['id' => 'book_id'])->via('authorAndBook')->all();
     }
 
     /**

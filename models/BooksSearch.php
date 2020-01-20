@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Books;
+use app\models\Book;
 
 /**
  * BooksSearch represents the model behind the search form of `app\models\Books`.
  */
-class BooksSearch extends Books
+class BooksSearch extends Book
 {
     /**
      * {@inheritdoc}
@@ -40,12 +40,15 @@ class BooksSearch extends Books
      */
     public function search($params)
     {
-        $query = Books::find();
+        $query = Book::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 7,
+            ],
         ]);
 
         $this->load($params);

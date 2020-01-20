@@ -1,8 +1,9 @@
 <?php
+//use \yii\web\Request;
+//$baseUrl = str_replace('/web', '', (new Request)->getBaseUrl());
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -15,6 +16,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'E5qJ_x-Pgm1HKv3NtrxObubsHYmZDW24',
+            'baseUrl' => '',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -45,12 +47,17 @@ $config = [
         'db' => $db,
         
         'urlManager' => [
+            //'class' => 'yii\web\UrlManager',
+            //'baseUrl' => '',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            //'enableStrictParsing' => true,
             'rules' => [
-            '<controller:\w+>/<id:\d+>' => '<controller>/view',
-            '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-            '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '/' => 'site/index',
+                '<action>'=>'site/<action>', 
+//            '<controller:\w+>/<id:\d+>' => '<controller>/view',
+//            '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+//            '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 
             ],
         ],

@@ -8,14 +8,8 @@ use app\components\bookandauthor\Bookandauthor;
 
 ?>
  
- <h1>Books And Authors</h1>
+ <h1>Authors And Books</h1>
 
-<?php echo Bookandauthor::widget(['param' => $param, 'model' => 'Book']); ?>
-
-
-
-
-
-
+<?php echo Bookandauthor::widget(['param' => $param, 'model' => 'Author']); ?>
 
 

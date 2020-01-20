@@ -3,10 +3,11 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Authors;
+use app\models\Author;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\AuthorsSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 
@@ -65,7 +66,7 @@ class AuthorsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Authors();
+        $model = new Author();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -109,6 +110,15 @@ class AuthorsController extends Controller
 
         return $this->redirect(['index']);
     }
+    
+    public function actionAuthortobook($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('authortobook',[
+            'param' => $id,
+            'model' => $model,
+        ]);
+    }
 
     /**
      * Finds the Authors model based on its primary key value.
@@ -119,11 +129,21 @@ class AuthorsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Authors::findOne($id)) !== null) {
+        if (($model = Author::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    
+    public function actionAuthorlist()
+    {   
+        $query = Author::find();
+        //var_dump($query);die;
+        return $this->render('authorlist',[
+            'param' => $query,
+        ]);
+    
     }
     
    

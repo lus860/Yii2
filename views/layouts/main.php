@@ -41,6 +41,7 @@ AppAsset::register($this);
             ['label' => 'Authors', 'url' => ['/authors/index']],
             ['label' => 'Books', 'url' => ['/books/index']],
             ['label' => 'Booklist', 'url' => ['/books/booklist']],
+             ['label' => 'Authorlist', 'url' => ['/authors/authorlist']],
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],

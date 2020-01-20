@@ -3,10 +3,10 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Books;
-use app\models\Authors;
-use app\models\BooksSearch;
+use app\models\Book;
+use app\models\Author;
 use yii\web\Controller;
+use app\models\BooksSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -66,8 +66,10 @@ class BooksController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Books();
+        $model = new Book();
+        $model->findauthor();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->saveauthor();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -86,7 +88,9 @@ class BooksController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->findauthor();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->saveauthor();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -109,6 +113,16 @@ class BooksController extends Controller
         return $this->redirect(['index']);
     }
     
+    public function actionBooktoauthor($id)
+    {
+        $model = $this->findModel($id);
+        //var_dump(is_numeric($id));die;
+        return $this->render('booktoauthor',[
+            'param' => $id,
+            'model' => $model,
+        ]);
+    }
+    
 
     /**
      * Finds the Books model based on its primary key value.
@@ -119,7 +133,7 @@ class BooksController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Books::findOne($id)) !== null) {
+        if (($model = Book::findOne($id)) !== null) {
             return $model;
         }
 
@@ -128,7 +142,11 @@ class BooksController extends Controller
     
     public function actionBooklist()
     {   
-        return $this->render('booklist');
+        $query = Book::find();
+        //var_dump($query);die;
+        return $this->render('booklist',[
+            'param' => $query,
+        ]);
     
     }
 }
